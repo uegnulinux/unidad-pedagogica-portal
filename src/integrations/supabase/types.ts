@@ -9,7 +9,224 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
-      [_ in never]: never
+      anos_escolaridad: {
+        Row: {
+          created_at: string
+          id: string
+          nivel: string
+          nombre: string
+          paralelo: string
+          unidad_educativa_id: string | null
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          nivel: string
+          nombre: string
+          paralelo: string
+          unidad_educativa_id?: string | null
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          nivel?: string
+          nombre?: string
+          paralelo?: string
+          unidad_educativa_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "anos_escolaridad_unidad_educativa_id_fkey"
+            columns: ["unidad_educativa_id"]
+            isOneToOne: false
+            referencedRelation: "unidades_educativas"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      campos_educativos: {
+        Row: {
+          color: string
+          created_at: string
+          id: string
+          nombre: string
+        }
+        Insert: {
+          color: string
+          created_at?: string
+          id?: string
+          nombre: string
+        }
+        Update: {
+          color?: string
+          created_at?: string
+          id?: string
+          nombre?: string
+        }
+        Relationships: []
+      }
+      docentes: {
+        Row: {
+          apellido: string
+          ci: string
+          created_at: string
+          email: string | null
+          especialidad: string | null
+          id: string
+          nombre: string
+          telefono: string | null
+          unidad_educativa_id: string | null
+        }
+        Insert: {
+          apellido: string
+          ci: string
+          created_at?: string
+          email?: string | null
+          especialidad?: string | null
+          id?: string
+          nombre: string
+          telefono?: string | null
+          unidad_educativa_id?: string | null
+        }
+        Update: {
+          apellido?: string
+          ci?: string
+          created_at?: string
+          email?: string | null
+          especialidad?: string | null
+          id?: string
+          nombre?: string
+          telefono?: string | null
+          unidad_educativa_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "docentes_unidad_educativa_id_fkey"
+            columns: ["unidad_educativa_id"]
+            isOneToOne: false
+            referencedRelation: "unidades_educativas"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      estudiantes: {
+        Row: {
+          ano_escolaridad_id: string | null
+          apellido: string
+          ci: string | null
+          created_at: string
+          direccion: string | null
+          fecha_nacimiento: string | null
+          genero: string | null
+          id: string
+          nombre: string
+          telefono: string | null
+        }
+        Insert: {
+          ano_escolaridad_id?: string | null
+          apellido: string
+          ci?: string | null
+          created_at?: string
+          direccion?: string | null
+          fecha_nacimiento?: string | null
+          genero?: string | null
+          id?: string
+          nombre: string
+          telefono?: string | null
+        }
+        Update: {
+          ano_escolaridad_id?: string | null
+          apellido?: string
+          ci?: string | null
+          created_at?: string
+          direccion?: string | null
+          fecha_nacimiento?: string | null
+          genero?: string | null
+          id?: string
+          nombre?: string
+          telefono?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "estudiantes_ano_escolaridad_id_fkey"
+            columns: ["ano_escolaridad_id"]
+            isOneToOne: false
+            referencedRelation: "anos_escolaridad"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      materias: {
+        Row: {
+          campo_id: string | null
+          created_at: string
+          id: string
+          nombre: string
+        }
+        Insert: {
+          campo_id?: string | null
+          created_at?: string
+          id?: string
+          nombre: string
+        }
+        Update: {
+          campo_id?: string | null
+          created_at?: string
+          id?: string
+          nombre?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "materias_campo_id_fkey"
+            columns: ["campo_id"]
+            isOneToOne: false
+            referencedRelation: "campos_educativos"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      unidades_educativas: {
+        Row: {
+          codigo_sie: string | null
+          created_at: string
+          departamento: string
+          dependencia: string
+          director: string
+          distrito_educativo: string
+          id: string
+          logo_url: string | null
+          nombre: string
+          turno: string
+          updated_at: string
+        }
+        Insert: {
+          codigo_sie?: string | null
+          created_at?: string
+          departamento: string
+          dependencia: string
+          director: string
+          distrito_educativo: string
+          id?: string
+          logo_url?: string | null
+          nombre: string
+          turno: string
+          updated_at?: string
+        }
+        Update: {
+          codigo_sie?: string | null
+          created_at?: string
+          departamento?: string
+          dependencia?: string
+          director?: string
+          distrito_educativo?: string
+          id?: string
+          logo_url?: string | null
+          nombre?: string
+          turno?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
