@@ -3,7 +3,8 @@ import {
   ClipboardList, 
   GraduationCap, 
   Home, 
-  Users 
+  Users,
+  LogOut
 } from "lucide-react";
 import {
   Sidebar,
@@ -17,6 +18,8 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
 import { useNavigate } from "react-router-dom";
+import { supabase } from "@/integrations/supabase/client";
+import { toast } from "sonner";
 
 const menuItems = [
   { title: "Dashboard", icon: Home, path: "/" },
@@ -28,6 +31,16 @@ const menuItems = [
 
 export function AppSidebar() {
   const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    try {
+      await supabase.auth.signOut();
+      navigate("/auth");
+      toast.success("Sesión cerrada exitosamente");
+    } catch (error) {
+      toast.error("Error al cerrar sesión");
+    }
+  };
 
   return (
     <Sidebar>
@@ -51,6 +64,12 @@ export function AppSidebar() {
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               ))}
+              <SidebarMenuItem>
+                <SidebarMenuButton onClick={handleLogout} className="text-red-600 hover:text-red-700">
+                  <LogOut className="h-4 w-4 mr-2" />
+                  <span>Cerrar Sesión</span>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
